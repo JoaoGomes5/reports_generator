@@ -23,11 +23,8 @@ defmodule ReportsGenerator do
     |> Enum.max_by(fn {_key, value} -> value end)
   end
 
-  defp sum_values([id, food_name, price],  %{
-    "foods" => foods,
-    "users" => users
-  } = report) do
-    users = Map.put(users, id, users[users] + price)
+  defp sum_values([id, food_name, price],  %{ "foods" => foods, "users" => users } = report) do
+    users = Map.put(users, id, users[id] + price)
     foods = Map.put(foods, food_name, foods[food_name] + 1)
 
     # report
