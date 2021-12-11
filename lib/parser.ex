@@ -3,7 +3,6 @@ defmodule ReportsGenerator.Parser do
     "reports/#{filename}"
     |> File.stream!()
     |> Stream.map(fn line -> parse_line(line) end)
-
   end
 
   defp parse_line(line) do
@@ -12,7 +11,4 @@ defmodule ReportsGenerator.Parser do
     |> String.split(",")
     |> List.update_at(2, &String.to_integer/1)
   end
-
-
-
 end
