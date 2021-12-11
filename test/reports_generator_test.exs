@@ -55,4 +55,20 @@ defmodule ReportsGeneratorTest do
       assert response == expected_value
     end
   end
+
+  describe "fetch_higher_cost/2" do
+    test "it should be able to return the user that spent the most when then option is 'users'" do
+      file_name = "report_test.scv"
+      option = "users"
+
+      response =
+        file_name
+        |> ReportsGenerator.build()
+        |> ReportsGenerator.fetch_higher_cost("users")
+
+      expected_value = "banana"
+
+      assert response == expected_value
+    end
+  end
 end
