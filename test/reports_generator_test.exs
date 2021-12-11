@@ -57,7 +57,7 @@ defmodule ReportsGeneratorTest do
   end
 
   describe "fetch_higher_cost/2" do
-    test "it should be able to return the user that spent the most when then option is 'users'" do
+    test "it should be able to return the user that spent the most when the option is 'users'" do
       file_name = "report_test.csv"
       option = "users"
 
@@ -71,7 +71,7 @@ defmodule ReportsGeneratorTest do
       assert response == expected_value
     end
 
-    test "it should be able to return the food with the most frequency when then option is 'foods'" do
+    test "it should be able to return the food with the most frequency when the option is 'foods'" do
       file_name = "report_test.csv"
       option = "foods"
 
@@ -81,6 +81,20 @@ defmodule ReportsGeneratorTest do
         |> ReportsGenerator.fetch_higher_cost(option)
 
       expected_value = {:ok, {"esfirra", 3}}
+
+      assert response == expected_value
+    end
+
+    test "it should not be able to return higher cost when the option is invalid" do
+      file_name = "report_test.csv"
+      option = "banana"
+
+      response =
+        file_name
+        |> ReportsGenerator.build()
+        |> ReportsGenerator.fetch_higher_cost(option)
+
+      expected_value = {:error, "Invalid option!"}
 
       assert response == expected_value
     end
