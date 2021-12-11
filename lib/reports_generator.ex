@@ -12,14 +12,15 @@ defmodule ReportsGenerator do
     "sushi"
   ]
 
+
   def build(filename) do
     filename
     |> Parser.parse_file()
     |> Enum.reduce(report_acc(), fn line, report -> sum_values(line, report) end )
   end
 
-  def fetch_higher_cost(report) do
-    report
+  def fetch_higher_cost(report, option) do
+    report[option]
     |> Enum.max_by(fn {_key, value} -> value end)
   end
 
