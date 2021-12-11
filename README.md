@@ -1,6 +1,6 @@
 # ReportsGenerator
 
-**TODO: Add description**
+**TODO: Generate simple reports**
 
 ## Installation
 
