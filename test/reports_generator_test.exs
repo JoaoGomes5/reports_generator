@@ -64,9 +64,23 @@ defmodule ReportsGeneratorTest do
       response =
         file_name
         |> ReportsGenerator.build()
-        |> ReportsGenerator.fetch_higher_cost("users")
+        |> ReportsGenerator.fetch_higher_cost(option)
 
       expected_value = {:ok, {"5", 49}}
+
+      assert response == expected_value
+    end
+
+    test "it should be able to return the food with the most frequency when then option is 'foods'" do
+      file_name = "report_test.csv"
+      option = "foods"
+
+      response =
+        file_name
+        |> ReportsGenerator.build()
+        |> ReportsGenerator.fetch_higher_cost(option)
+
+      expected_value = {:ok, {"esfirra", 3}}
 
       assert response == expected_value
     end
