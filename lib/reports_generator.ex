@@ -1,21 +1,12 @@
 defmodule ReportsGenerator do
-  def build(filename) do
-    "reports/#{filename}"
-    |> File.stream!()
-    |> Enum.reduce(report_acc(),
-    fn line, report ->
-      [id, _food_name, price] = parse_line(line)
-      Map.put(report, id, report[id] + price)
-    end
-    )
-  end
+  alias ReportsGenerator.Parser
 
-  defp parse_line(line) do
-    line
-    |> String.trim()
-    |> String.split(",")
-    |> List.update_at(2, &String.to_integer/1)
+  def build(filename) do
+    filename
+    |> Parser.parse_file()
+    |> Enum.reduce(report_acc(), fn line, report -> sum_values(line, report) end )
   end
+  defp sum_values([id, _food_name, price], report), do: Map.put(report, id, report[id] + price)
 
   defp report_acc(), do: Enum.into(1..30, %{}, &{Integer.to_string(&1), 0})
 
