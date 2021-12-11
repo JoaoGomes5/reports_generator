@@ -1,5 +1,5 @@
 defmodule ReportsGenerator do
-  def hello do
-    :world
+  def build(filename) do
+    file =  File.read("reports/#{filename}")
   end
 end
