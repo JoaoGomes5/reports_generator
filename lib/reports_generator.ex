@@ -20,6 +20,9 @@ defmodule ReportsGenerator do
     |> Enum.reduce(report_acc(), fn line, report -> sum_values(line, report) end)
   end
 
+  def build_from_many() do
+  end
+
   def fetch_higher_cost(report, option) when option in @options do
     {:ok, Enum.max_by(report[option], fn {_key, value} -> value end)}
   end
